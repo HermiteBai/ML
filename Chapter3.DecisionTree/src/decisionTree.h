@@ -24,6 +24,5 @@ std::list<Data> split(std::list<Data> dataSet, std::string axis, std::string val
 TreeNode createTree(std::list<Data> dataSet);
 void printTree(TreeNode root, int deepth, std::string value);
 void storeTree(TreeNode root, int deepth, std::string value, std::ofstream& fout);
-//TreeNode getTree(std::filename);
 
 #endif

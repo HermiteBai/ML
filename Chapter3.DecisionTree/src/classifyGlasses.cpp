@@ -37,6 +37,8 @@ list<Data> file2DataSet(char* filename)
 		data.label = token;
 		ret.push_back(data);
 	}
+	free(buffer);
+	buffer = NULL;
 	fclose(file);
 	return ret;
 }

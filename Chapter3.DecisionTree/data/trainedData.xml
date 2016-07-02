@@ -1,49 +1,49 @@
 <Tearate>
-	<value:normal>
-	<Prescript>
-		<value:hyper>
-		<Astigmatic>
-			<value:no>
-			soft
-			</value:no>
-			<value:yes>
-			<Age>
-				<value:pre>
-				no lenses
-				</value:pre>
-				<value:presbyopic>
-				no lenses
-				</value:presbyopic>
-				<value:young>
-				hard
-				</value:young>
-			</value:yes>
-			</Age>
-		</value:hyper>
-		</Astigmatic>
-		<value:myope>
-		<Astigmatic>
-			<value:no>
-			<Age>
-				<value:pre>
-				soft
-				</value:pre>
-				<value:presbyopic>
-				no lenses
-				</value:presbyopic>
-				<value:young>
-				soft
-				</value:young>
-			</value:no>
-			</Age>
-			<value:yes>
-			hard
-			</value:yes>
-		</value:myope>
-		</Astigmatic>
-	</value:normal>
-	</Prescript>
-	<value:reduced>
-	no lenses
-	</value:reduced>
+<value:normal>
+<Prescript>
+<value:hyper>
+<Astigmatic>
+<value:no>
+soft
+</value:no>
+<value:yes>
+<Age>
+<value:pre>
+no lenses
+</value:pre>
+<value:presbyopic>
+no lenses
+</value:presbyopic>
+<value:young>
+hard
+</value:young>
+</value:yes>
+</Age>
+</value:hyper>
+</Astigmatic>
+<value:myope>
+<Astigmatic>
+<value:no>
+<Age>
+<value:pre>
+soft
+</value:pre>
+<value:presbyopic>
+no lenses
+</value:presbyopic>
+<value:young>
+soft
+</value:young>
+</value:no>
+</Age>
+<value:yes>
+hard
+</value:yes>
+</value:myope>
+</Astigmatic>
+</value:normal>
+</Prescript>
+<value:reduced>
+no lenses
+</value:reduced>
 </Tearate>

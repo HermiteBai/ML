@@ -4,7 +4,10 @@
 #include <list>
 #include <map>
 #include <set>
+#include <stack>
 #include <cmath>
+#include <cstring>
+#include <cstdlib>
 #include "decisionTree.h"
 
 using std::cout;
@@ -14,6 +17,7 @@ using std::map;
 using std::log;
 using std::set;
 using std::string;
+using std::stack;
 
 double entropy(list<Data> dataSet)
 {
@@ -157,28 +161,14 @@ void printTree(TreeNode root, int deepth, string value)
 
 void storeTree(TreeNode root, int deepth, string value, std::ofstream& fout)
 {
-	//cout  << endl;
 	if (value.empty() == false)
 	{
-		for (int i = 0; i < deepth; i++)
-		{
-			fout << "\t";
-		}
 		fout << "<value:" << value << ">" << endl;
 	}
 
 	if (root.axis.empty())
 	{
-		//cout  << endl;
-		for (int i = 0; i < deepth; i++)
-		{
-			fout << "\t";
-		}
 		fout << root.label << endl;
-		for (int i = 0; i < deepth; i++)
-		{
-			fout << "\t";
-		}
 		if (value.empty() == false)
 		{
 			fout << "</value:" << value << ">" << endl;
@@ -186,11 +176,6 @@ void storeTree(TreeNode root, int deepth, string value, std::ofstream& fout)
 	}
 	else
 	{
-		//cout  << endl;
-		for (int i = 0; i < deepth; i++)
-		{
-			fout << "\t";
-		}
 		fout << "<" << root.axis << ">" << endl;
 		for (auto iter : root.children)
 		{
@@ -199,26 +184,8 @@ void storeTree(TreeNode root, int deepth, string value, std::ofstream& fout)
 
 		if (value.empty() == false)
 		{
-			for (int i = 0; i < deepth; i++)
-			{
-				fout << "\t";
-			}
 			fout << "</value:" << value << ">" << endl;
-		}
-		//cout  << endl;
-		for (int i = 0; i < deepth; i++)
-		{
-			fout << "\t";
 		}
 		fout << "</" << root.axis << ">" << endl;
 	}
 }
-/*
-TreeNode getTree(char* filename)
-{
-
-}
-*/
-
-
-
