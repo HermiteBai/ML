@@ -158,8 +158,8 @@ void printTree(TreeNode root, int deepth, string value)
 	}
 	cout << endl;
 }
-
-void storeTree(TreeNode root, int deepth, string value, std::ofstream& fout)
+/*
+void serialize(TreeNode root, int deepth, string value, std::ofstream& fout)
 {
 	if (value.empty() == false)
 	{
@@ -189,3 +189,57 @@ void storeTree(TreeNode root, int deepth, string value, std::ofstream& fout)
 		fout << "</" << root.axis << ">" << endl;
 	}
 }
+*/
+void serialize(TreeNode root, int deepth, std::ofstream& fout)
+{
+
+	fout << "{" << endl;
+	for (int i = 0; i < deepth + 1; i++)
+	{
+		fout << "\t";
+	}
+	fout << "\"axis\" : \"" << root.axis << "\"," << endl;
+	for (int i = 0; i < deepth + 1; i++)
+	{
+		fout << "\t";
+	}
+	fout << "\"label\" : \"" << root.label << "\"," << endl;
+	for (int i = 0; i < deepth + 1; i++)
+	{
+		fout << "\t";
+	}
+	fout << "\"children\" : [";
+
+	if (root.children.empty() == false)
+	{
+		fout << endl;
+		for (auto iter : root.children)
+		{
+			for (int i = 0; i < deepth + 2; i++)
+			{
+				fout << "\t";
+			}
+			fout << "\"" << iter.first << "\" : ";
+			serialize(iter.second , deepth + 2, fout);
+		}
+
+		for (int i = 0; i < deepth + 1; i++)
+		{
+			fout << "\t";
+		}
+	}
+	fout << "]" << endl;
+	for (int i = 0; i < deepth; i++)
+	{
+		fout << "\t";
+	}
+	fout << "}" << endl;
+}
+
+
+
+
+
+
+
+

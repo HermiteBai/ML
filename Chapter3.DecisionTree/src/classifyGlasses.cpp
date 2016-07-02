@@ -73,8 +73,8 @@ int main(int argc, char const *argv[])
 	TreeNode root = createTree(dataSet);
 	printTree(root, 0, "");
 	std::ofstream fout;
-	fout.open("../data/trainedData.xml");
-	storeTree(root, 0, "", fout);
+	fout.open("../data/trainedData.json");
+	serialize(root, 0, fout);
 	fout.close();
 	cout << "Start testing decision tree generated..." << endl;
 	cout << "--------------------------------------------" << endl;

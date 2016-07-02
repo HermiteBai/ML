@@ -1,0 +1,81 @@
+{
+	"axis" : "Tearate",
+	"label" : "",
+	"children" : [
+		"normal" : {
+			"axis" : "Prescript",
+			"label" : "",
+			"children" : [
+				"hyper" : {
+					"axis" : "Astigmatic",
+					"label" : "",
+					"children" : [
+						"no" : {
+							"axis" : "",
+							"label" : "soft",
+							"children" : []
+						}
+						"yes" : {
+							"axis" : "Age",
+							"label" : "",
+							"children" : [
+								"pre" : {
+									"axis" : "",
+									"label" : "no lenses",
+									"children" : []
+								}
+								"presbyopic" : {
+									"axis" : "",
+									"label" : "no lenses",
+									"children" : []
+								}
+								"young" : {
+									"axis" : "",
+									"label" : "hard",
+									"children" : []
+								}
+							]
+						}
+					]
+				}
+				"myope" : {
+					"axis" : "Astigmatic",
+					"label" : "",
+					"children" : [
+						"no" : {
+							"axis" : "Age",
+							"label" : "",
+							"children" : [
+								"pre" : {
+									"axis" : "",
+									"label" : "soft",
+									"children" : []
+								}
+								"presbyopic" : {
+									"axis" : "",
+									"label" : "no lenses",
+									"children" : []
+								}
+								"young" : {
+									"axis" : "",
+									"label" : "soft",
+									"children" : []
+								}
+							]
+						}
+						"yes" : {
+							"axis" : "",
+							"label" : "hard",
+							"children" : []
+						}
+					]
+				}
+			]
+		}
+		"reduced" : {
+			"axis" : "",
+			"label" : "no lenses",
+			"children" : []
+		}
+	]
+}
