@@ -4,6 +4,7 @@
 #include <list>
 #include <map>
 #include <fstream>
+#include "../lib/json/json.h"
 
 typedef struct Data
 {
@@ -24,5 +25,6 @@ std::list<Data> split(std::list<Data> dataSet, std::string axis, std::string val
 TreeNode createTree(std::list<Data> dataSet);
 void printTree(TreeNode root, int deepth, std::string value);
 void serialize(TreeNode root, int deepth, std::ofstream& fout);
-
+TreeNode unserialize(char* filename);
+TreeNode unserializeHelper(Json::Value value);
 #endif

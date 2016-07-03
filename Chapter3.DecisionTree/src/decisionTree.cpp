@@ -8,6 +8,7 @@
 #include <cmath>
 #include <cstring>
 #include <cstdlib>
+#include "../lib/json/json.h"
 #include "decisionTree.h"
 
 using std::cout;
@@ -162,55 +163,83 @@ void printTree(TreeNode root, int deepth, string value)
 void serialize(TreeNode root, int deepth, std::ofstream& fout)
 {
 
-	fout << "{" << endl;
-	for (int i = 0; i < deepth + 1; i++)
-	{
-		fout << "\t";
-	}
-	fout << "\"axis\" : \"" << root.axis << "\"," << endl;
-	for (int i = 0; i < deepth + 1; i++)
-	{
-		fout << "\t";
-	}
-	fout << "\"label\" : \"" << root.label << "\"," << endl;
-	for (int i = 0; i < deepth + 1; i++)
-	{
-		fout << "\t";
-	}
+	fout << "{";
+
+	fout << "\"axis\" : \"" << root.axis << "\",";
+
+	fout << "\"label\" : \"" << root.label << "\",";
+
 	fout << "\"children\" : [";
 
 	if (root.children.empty() == false)
 	{
-		fout << endl;
 		int count = 1;
 
 		for (auto iter : root.children)
 		{
 			if (count-- != 1)
-				fout << "," << endl;
-			for (int i = 0; i < deepth + 2; i++)
-			{
-				fout << "\t";
-			}
-			fout << "{" << endl;
-			for (int i = 0; i < deepth + 3; i++)
-			{
-				fout << "\t";
-			}
+				fout << ",";
+
+			fout << "{";
+
 			fout << "\"" << iter.first << "\" : ";
 			serialize(iter.second , deepth + 3, fout);
 			fout << "}";
 		}
 	}
-	fout << "]" << endl;
-	for (int i = 0; i < deepth; i++)
-	{
-		fout << "\t";
-	}
+	fout << "]";
 	fout << "}";
 }
 
+TreeNode unserialize(char* filename)
+{
+	Json::Reader reader;
+	Json::Value root;
 
+	string JS;
+
+	FILE* file = fopen(filename, "r");
+	if (!file)
+	{
+		std::cerr << "Cannot open file" << filename << endl;
+		return TreeNode();
+	}
+	char* buffer = NULL;
+	std::size_t length;
+
+
+	while(getline(&buffer, &length, file) != -1)
+	{
+		cout << "DEBUG" << endl;
+		JS = buffer;
+	}
+
+	fclose(file);
+
+	//free(buffer);
+	if (reader.parse(JS, root))
+	{	
+		return unserializeHelper(root);
+	}
+
+
+	return TreeNode();
+}
+
+TreeNode unserializeHelper(Json::Value value)
+{
+	TreeNode ret;
+	ret.axis = value["axis"].asString();
+	ret.label = value["label"].asString();
+	const Json::Value arrayObj = value["children"];
+
+	for (unsigned int i = 0; i < arrayObj.size(); i++)
+	{
+		Json::Value::Members members = arrayObj[i].getMemberNames();
+		ret.children[members[0]] = unserializeHelper(arrayObj[i][members[0]]);
+	}
+	return ret;
+}
 
 
 

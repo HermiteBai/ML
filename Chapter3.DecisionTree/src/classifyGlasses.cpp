@@ -4,6 +4,7 @@
 #include <cstring>
 #include <list>
 #include <map>
+#include <unistd.h>
 #include "decisionTree.h"
 
 using namespace std;
@@ -68,14 +69,22 @@ string classify(Data data, TreeNode root)
 int main(int argc, char const *argv[])
 {
 	list<Data> dataSet = file2DataSet("../test/lenses.txt");
-	//printDataSet(dataSet);
 	cout << "Generating Decision Tree..." << endl;
-	TreeNode root = createTree(dataSet);
+	char* trainedData = "../data/trainedData.json";
+	TreeNode root;
+	if (access(trainedData, F_OK) == 0)
+	{
+		root = unserialize(trainedData);
+	}
+	else
+	{
+		root = createTree(dataSet);
+		std::ofstream fout;
+		fout.open(trainedData);
+		serialize(root, 0, fout);
+		fout.close();
+	}	
 	printTree(root, 0, "");
-	std::ofstream fout;
-	fout.open("../data/trainedData.json");
-	serialize(root, 0, fout);
-	fout.close();
 	cout << "Start testing decision tree generated..." << endl;
 	cout << "--------------------------------------------" << endl;
 	double total = 0.0;
