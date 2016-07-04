@@ -210,7 +210,6 @@ TreeNode unserialize(char* filename)
 
 	while(getline(&buffer, &length, file) != -1)
 	{
-		cout << "DEBUG" << endl;
 		JS = buffer;
 	}
 
