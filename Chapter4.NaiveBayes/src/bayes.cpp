@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 #include <map>
+#include <set>
 #include <cstring>
 
 #include "bayes.h"
@@ -24,11 +25,11 @@ map<Data, map<string, double> > bayes(string label, Data target, list<Data> data
 			double count = 0.0;
 			for (auto feature : data.features)
 			{
-				if (data.features.find(feature) != data.features.end())
+				if (data.features.find(feature.first) != data.features.end())
 				{
-					temp[kind] += 1.0;
+					temp[kind] += feature.second;
 				}
-				count += 1.0;
+				count += feature.second;
 			}
 			temp[kind] /= count;
 		}

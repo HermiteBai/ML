@@ -12,10 +12,10 @@ using namespace std;
 
 typedef struct Data
 {
-	map<string, string> features;
+	map<string, double> features;
 	string label;
 } Data;
 
-double bayes(string label, Data target);
+map<Data, map<string, double> > bayes(string label, Data target, list<Data> dataSet);
 
 #endif
