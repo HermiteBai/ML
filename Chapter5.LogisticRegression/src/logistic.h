@@ -7,7 +7,7 @@
 #include "math_vector.h"
 typedef struct Data
 {
-	Math_vector parameters;
+	vector<double> parameters;
 	double kind;
 }Data;
 
