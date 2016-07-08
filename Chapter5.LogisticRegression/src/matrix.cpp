@@ -1,39 +1,60 @@
-#include "math_vector.h"
 #include "matrix.h"
 
-Matrix::Matrix(std::size_t width, std::size_t height)
+//Constructor
+Matrix::Matrix(std::size_t width, std::size_t weight)
 {
-	rows = new Math_vector[height];
+	coordinates = new double*[height]();
 	for (int i = 0; i < height; i++)
 	{
-		rows[i] = new Math_vector(width);
+		coordinates[i] = new double[width]();
 	}
 }
 
-Matrix::Matrix(const Matrix& mat)const
+Matrix::Matrix(const Matrix& mat)
 {
-	this->rows = new Math_vector[height];
+	coordinates = new double*[height];
 	for (int i = 0; i < height; i++)
 	{
-		this->rows[i] = mat[i];
+		coordinates[i] = new double[width];
+		for (int j = 0; j < width; j++)
+		{
+			coordinates[i][j] = mat[i][j];
+		}
 	}
 }
 
+//Destructor
 Matrix::~Matrix()
 {
-	for (int i = 0; i < height; i++)
+	for (int j = 0; j < width; j++)
 	{
-		delete rows[i];
+		delete coordinates[i];
 	}
-	delete[] rows;
+	delete[] coordinates;
 }
 
+//Access to member attributes
+
+std::size_t Matrix::getWidth()const
+{
+	return width;
+}
+
+std::size_t Matrix::getHeight()const
+{
+	return height;
+}
+
+//Basic Operations
 Matrix& Matrix::operator+(const Matrix& mat)const
 {
 	Matrix ret;
 	for (int i = 0; i < height; i++)
 	{
-		ret[i] = (*this)[i] + mat[i];
+		for (int j = 0; j < width; j++)
+		{
+			ret[i][j] = (*this)[i][j] + mat[i][j];
+		}
 	}
 	return ret;
 }
@@ -43,24 +64,37 @@ Matrix& Matrix::operator-(const Matrix& vec)const
 	Matrix ret;
 	for (int i = 0; i < height; i++)
 	{
-		ret[i] = (*this)[i] - mat[i];
+		for (int j = 0; j < width; j++)
+		{
+			ret[i][j] = (*this)[i][j] - mat[i][j];
+		}
 	}
 	return ret;
 }
 
 Matrix& Matrix::operator=(const Matrix& vec)const
 {
+	if (*this == mat)
+		return *this;
+
 	for (int i = 0; i < height; i++)
 	{
-		(*this)[i] = mat[i];
+		for (int j = 0; j < width; j++)
+		{
+			(*this)[i][j] = mat[i][j];
+		}
 	}
+	return *this;
 }
 
 void Matrix::operator+=(const Matrix& vec)
 {
 	for (int i = 0; i < height; i++)
 	{
-		(*this)[i] += mat[i];
+		for (int j = 0; j < width; j++)
+		{
+			(*this)[i][j] += mat[i][j];
+		}
 	}
 }
 
@@ -68,7 +102,10 @@ void Matrix::operator-=(const Matrix& vec)
 {
 	for (int i = 0; i < height; i++)
 	{
-		(*this)[i] -= mat[i];
+		for (int j = 0; j < width; j++)
+		{
+			(*this)[i][j] -= mat[i][j];
+		}
 	}
 }
 
@@ -77,7 +114,10 @@ Matrix& Matrix::operator*(double a)const
 	Matrix ret;
 	for (int i = 0; i < height; i++)
 	{
-		ret[i] = (*this)[i] * a;
+		for (int j = 0; j < width; j++)
+		{
+			ret[i][j] = (*this)[i][j] * a;
+		}
 	}
 	return ret;
 }
@@ -86,13 +126,15 @@ void Matrix::operator*=(double a)
 {
 	for (int i = 0; i < height; i++)
 	{
-		(*this)[i] *= mat[i];
+		for (int j = 0; j < width; j++)
+		{
+			(*this)[i][j] *= mat[i][j];
+		}
 	}
 }
 
-Matrix& Matrix::operator*(const Matrix& vec)const
+double Matrix::operator*(const const Matrix& vec)const
 {
-	if (this->width != vec.height)
 	Matrix ret;
 	for (int i = 0; i < width; i++)
 	{
@@ -100,29 +142,27 @@ Matrix& Matrix::operator*(const Matrix& vec)const
 		{
 			for (int k = 0; k < width; k++)
 			{
-
-				(((ret.rows)[j]).coordinates)[i] += (*this)[j][k] * vec[k][j];
+				ret[j][i] += (*this)[j][k] * mat[k][j];
 			}
 		}
 	}
 	return ret;
 }
 
-Math_vector Matrix::operator[](std::size_t index)
+double* Matrix::operator[](std::size_t index)
 {
-	return rows[index];
+	return coordinates[index];
 }
 
-void Matrix::transpose()
+Matrix& Matrix::transpose()
 {
+	Matrix ret(height, width);
 	for (int i = 0; i < height; i++)
 	{
 		for (int j = 0; j < width; j++)
 		{
-			double temp = (*this)[i][j];
-			((this->rows)[i].coordinates)[j] = (*this)[j][i];
-			((this->rows)[j].coordinates)[i] =  temp;
+			ret[i][j] = (*this)[j][i];
 		}
 	}
+	return ret;
 }
-

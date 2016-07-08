@@ -5,7 +5,11 @@ class Matrix
 {
 public:
 	Matrix(std::size_t width, std::size_t weight);
-	~Matrix();
+	Matrix(const Matrix& mat);
+	virtual ~Matrix();
+
+	std::size_t getWidth()const;
+	std::size_t getHeight()const;
 
 	Matrix& operator+(const Matrix& mat)const;
 	Matrix& operator-(const Matrix& vec)const;
@@ -15,11 +19,11 @@ public:
 	Matrix& operator*(double a)const;
 	void operator*=(double a);
 	double operator*(const const Matrix& vec)const;
-	double operator[](std::size_t index);
+	double* operator[](std::size_t index);
 	void transpose();
 
 private:
-	Math_vector* rows;
+	double** coordinates;
 	std::size_t width;
 	std::size_t height;
 };
