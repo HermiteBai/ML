@@ -6,6 +6,7 @@ class Math_vector
 {
 public:
 	Math_vector(std::size_t dim);
+	Math_vector(const Math_vector& vec);
 	virtual ~Math_vector();
 
 	Math_vector& operator+(const Math_vector& vec)const;
@@ -16,10 +17,10 @@ public:
 	Math_vector& operator*(double a)const;
 	void operator*=(double a);
 	double operator*(const Math_vector& vec)const;
+	double operator[](std::size_t index);
 private:
 	double* coordinates;
 	std::size_t dim;
-	double at(std::size_t num);
 	std::size_t dim();
 };
 
