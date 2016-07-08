@@ -8,7 +8,7 @@
 typedef struct Data
 {
 	Math_vector parameters;
-	int kind;
+	double kind;
 }Data;
 
 double sigmoid(double x);

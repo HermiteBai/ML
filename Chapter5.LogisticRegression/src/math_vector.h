@@ -11,6 +11,7 @@ public:
 
 	Math_vector& operator+(const Math_vector& vec)const;
 	Math_vector& operator-(const Math_vector& vec)const;
+	Math_vector& operator-(const double num)const;
 	Math_vector& operator=(const Math_vector& vec)const;
 	void operator+=(const Math_vector& vec);
 	void operator-=(const Math_vector& vec);

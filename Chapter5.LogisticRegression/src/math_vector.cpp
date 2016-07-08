@@ -29,12 +29,12 @@ Math_vector& Math_vector::operator+(const Math_vector& vec)const
 	return ret;
 }
 
-Math_vector& Math_vector::operator-(const Math_vector& vec)const
+Math_vector& Math_vector::Math_vector& operator-(const double num)const
 {
 	Math_vector ret;
 	for (int i = 0; i < dim; i++)
 	{
-		ret.coordinates[i] = this->coordinates[i] - vec.at(i);
+		ret.coordinates[i] = this->coordinates[i] - num;
 	}
 	return ret;
 }
