@@ -113,4 +113,16 @@ Math_vector Matrix::operator[](std::size_t index)
 	return rows[index];
 }
 
+void Matrix::transpose()
+{
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			double temp = (*this)[i][j];
+			((this->rows)[i].coordinates)[j] = (*this)[j][i];
+			((this->rows)[j].coordinates)[i] =  temp;
+		}
+	}
+}
 

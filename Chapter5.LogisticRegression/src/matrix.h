@@ -16,6 +16,7 @@ public:
 	void operator*=(double a);
 	double operator*(const const Matrix& vec)const;
 	double operator[](std::size_t index);
+	void transpose();
 
 private:
 	Math_vector* rows;
