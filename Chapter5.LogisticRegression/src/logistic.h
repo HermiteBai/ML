@@ -4,12 +4,14 @@
 #include <iostream>
 #include <list>
 #include <vector>
-#include "math_vector.h"
+
 typedef struct Data
 {
-	vector<double> parameters;
+	std::vector<double> parameters;
 	double kind;
 }Data;
+
+Data loadData(char* filename);
 
 double sigmoid(double x);
 

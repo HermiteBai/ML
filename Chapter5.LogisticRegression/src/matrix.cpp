@@ -10,6 +10,19 @@ Matrix::Matrix(std::size_t width, std::size_t weight)
 	}
 }
 
+Matrix::Matrix(std::vector<Data> dataSet)
+{
+	coordinates = new double*[height]();
+	for (int i = 0; i < height; i++)
+	{
+		coordinates[i] = new double[width]();
+		for (int j = 0; j < width; j++)
+		{
+			coordinates[i][j] = ((dataSet[i]).parameters)[j];
+		}
+	}
+}
+
 Matrix::Matrix(const Matrix& mat)
 {
 	coordinates = new double*[height];

@@ -5,6 +5,7 @@ class Matrix
 {
 public:
 	Matrix(std::size_t width, std::size_t weight);
+	Matrix(std::vector<Data> dataSet);
 	Matrix(const Matrix& mat);
 	virtual ~Matrix();
 
