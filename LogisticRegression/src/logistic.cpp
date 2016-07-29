@@ -35,7 +35,7 @@ std::vector<Data> loadData(char* filename)
 
 double sigmoid(double x)
 {
-	return 1.0 / (1 + exp(x));
+	return 1.0 / (1 + exp(-x));
 }
 
 Matrix gradAscent(std::vector<Data> dataSet)
