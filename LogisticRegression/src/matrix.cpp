@@ -179,3 +179,51 @@ Matrix& Matrix::transpose()
 	}
 	return ret;
 }
+
+std::vector<double> Matrix::sample(std::size_t n)
+{
+	std::vector<double> ret;
+	for (int i = 0; i < dim; i++)
+	{
+		ret.push_back((this*)[i][n]);
+	}
+	return ret;
+}
+
+Matrix& Matrix::covMat()const
+{
+	std::size_t dim = width;
+	std::size_t size = height;
+	Matrix ret(dim, dim);
+	for (std::size_t i = 0; i < dim; i++)
+	{
+		for (std::size_t j = 0; j < dim; j++)
+		{
+			ret.coordinates[j][i] = cov(sample(j), sample(i));
+		}
+	}
+	return ret;
+}
+
+static double Matrix::cov(std::vector<double> vec1, std::vector<double> vec2)const
+{
+	std::size_t size = vec.size();
+	double sum = 0;
+	double average1 = average(vec1);
+	double average2 = average(vec2);
+	for (std::size_t i = 0; i < vec1.size(); i++)
+	{
+		sum += (vec1[i] - average1) * (vec2[i] - average2);
+	}
+	return sum;
+}
+
+static double Matrix::average(std::vector<double> vec)const
+{
+	double sum = 0;
+	for (double num : vec)
+	{
+		sum += num;
+	}
+	return sum / vec.size();
+}
